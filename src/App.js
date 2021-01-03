@@ -1,3 +1,4 @@
+import Login from './components/Login'
 import logo from './burger-logo.png';
 import './App.css';
 
@@ -6,7 +7,7 @@ function App() {
     <div className="App">
       <img src={logo} alt="Delicious Burger" id="logo" />
       <hr></hr>
-      
+      <Login />
 
     </div>
   );
