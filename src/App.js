@@ -19,12 +19,14 @@ class App extends React.Component {
       bun: '',
       sauce: '',
       extra: '',
-      loggedIn:false
+      loggedIn:false,
+      orderCompleted: false
     };
     this.usercheck = this.usercheck.bind(this);
     this.setUserName = this.setUserName.bind(this);
     this.setPassword = this.setPassword.bind(this);
     this.setInput = this.setInput.bind(this);
+    this.completeOrder = this.completeOrder.bind(this);
   }
 
   usercheck(){
@@ -55,10 +57,17 @@ class App extends React.Component {
     })
   }
 
+  completeOrder(e) {
+    e.preventDefault();
+    this.setState({ orderCompleted: true })
+  }
+
   render(){
     let currComponent;
-    if(this.state.loggedIn) {
-      currComponent = <Order inputFunction={this.setInput}/>
+    if(this.state.orderCompleted) {
+      currComponent = <Summary order={this.state}/>
+    } else if(this.state.loggedIn) {
+      currComponent = <Order inputFunction={this.setInput} setComplete={this.completeOrder}/>
     } else {
       currComponent = <Login userName={this.setUserName}
       userpassword={this.setPassword} checkUser={this.usercheck}/>
